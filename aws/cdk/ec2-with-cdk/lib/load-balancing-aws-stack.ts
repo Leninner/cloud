@@ -48,7 +48,7 @@ export class LoadBalancingAwsStack extends cdk.Stack {
     });
 
     // Read the user data script from the file system
-    const userData = readFileSync("../data/user-data.sh", "utf8");
+    const userData = readFileSync("./data/user-data.sh", "utf8");
     instance.addUserData(userData);
   }
 }

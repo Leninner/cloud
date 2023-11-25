@@ -16,10 +16,10 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 > Blog post is available [here](https://www.antonio.cloud/projects/load-balancing-aws/)
 
 
-## Checks
+## To deploy
 
-Run the `cdk-deploy-to.sh` script to deploy the stack to your AWS account. You can find the script in the root folder of the project.
+Run the following commands:
 
 ```bash
-sh cdk-deploy-to.sh your-aws-account-id your-aws-region "$@"
+bash cdk-deploy-to.sh <account-id> <region> --profile <profile>
 ```
