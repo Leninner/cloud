@@ -1,0 +1,48 @@
+version: "3.1"
+
+services:
+  first-server:
+    image: mysql/mysql-server:8.0
+    container_name: first-server
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: first_db
+      MYSQL_USER: first_user
+      MYSQL_PASSWORD: first_pass
+    ports:
+      - 3306:3306
+    networks:
+      - groupnet
+  
+  second-server:
+    image: mysql/mysql-server:8.0
+    container_name: second-server
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: second_db
+      MYSQL_USER: second_user
+      MYSQL_PASSWORD: second_pass
+    ports:
+      - 3307:3306
+    networks:
+      - groupnet
+
+  third-server:
+    image: mysql/mysql-server:8.0
+    container_name: third-server
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: third_db
+      MYSQL_USER: third_user
+      MYSQL_PASSWORD: third_pass
+    ports:
+      - 3308:3306
+    networks:
+      - groupnet
+  
+networks:
+  groupnet:
+    driver: bridge
