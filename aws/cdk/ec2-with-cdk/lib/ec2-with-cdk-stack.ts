@@ -3,10 +3,10 @@ import { Construct } from "constructs";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { readFileSync } from "fs";
 
-export class LoadBalancingAwsStack extends cdk.Stack {
+export class Ec2WithCdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-
+    
     // Set up the default VPC for the region
     const vpc = ec2.Vpc.fromLookup(this, "VPC", {
       isDefault: true,
