@@ -3,6 +3,7 @@ import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { ServerlessAppStack } from '../lib/serverless-app-stack';
 import { CodeCommitStack } from '../lib/code-commit-stack';
+import { UserPoolStack } from '../lib/user-pool-stack';
 
 const app = new cdk.App();
 
@@ -28,3 +29,14 @@ new CodeCommitStack(app, 'CodeCommitStack', {
     account: '749710350214',
   }
 })
+
+new UserPoolStack(app, 'UserPoolStack', {
+  env: {
+    region: 'us-east-1',
+    account: '749710350214',
+  }
+})
+
+
+// UserPoolStack.UserPoolClientId = 35m1f5thc8aldohvbrnpvnsdj6
+// UserPoolStack.UserPoolId = us-east-1_3jbK5xj7t
