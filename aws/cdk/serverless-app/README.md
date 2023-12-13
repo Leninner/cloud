@@ -1,8 +1,6 @@
-# Welcome to your CDK TypeScript project
+# Serverless Application with AWS CDK
 
-This is a blank project for CDK development with TypeScript.
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+This is a project to create a serverless application using AWS CDK. You can read the full article [here](https://leninner.vercel.app/projects/static-website-cdk/).
 
 ## Useful commands
 
