@@ -3,6 +3,7 @@ import { Construct } from "constructs";
 import * as codecommit from "aws-cdk-lib/aws-codecommit";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as amplify from "aws-cdk-lib/aws-amplify";
+import * as email from "aws-cdk-lib/aws-ses";
 
 export class CodeCommitStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -87,6 +88,17 @@ export class CodeCommitStack extends cdk.Stack {
       branchName: "main",
       appId: amplifyApp.attrAppId,
       enableAutoBuild: true,
+    });
+
+    const emailSender = new email.EmailIdentity(this, "Email sender", {
+      identity: {
+        value: "mazabandalenin180@gmail.com",
+      },
+    });
+
+    new cdk.CfnOutput(this, "SesIdentityName", {
+      value: emailSender.emailIdentityName,
+      exportName: "SesIdentityName",
     });
 
     new cdk.CfnOutput(this, "AmplifyAppId", {
