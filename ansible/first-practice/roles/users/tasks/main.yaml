@@ -1,0 +1,6 @@
+---
+- name: Create or delete user accounts
+  loop: "{{ users_list }}"
+  ansible.builtin.user:
+    name: "{{ item.username }}"
+    state: "{{ item.state }}"
