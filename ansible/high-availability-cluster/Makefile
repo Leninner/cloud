@@ -18,10 +18,6 @@ IP_ADDRESSES=$(shell awk -F'[][]' '/^\[.*\]$$/{print $$2}' inventory.ini | while
     awk -v section="$$section" '/^\[/{p=0}/'$$section'/{p=1} p && !/^$|^\[/{print}' inventory.ini | grep -v '^$$'; \
     done)
 
-servers_are_up:
-		@echo "Checking if servers are up..."
-		@ansible -i inventory.ini all -m ping | grep "No route to host"  
-
 get_ip_addresses:
 		@echo "IP Addresses: $(IP_ADDRESSES)"
 
@@ -29,10 +25,7 @@ generate_ssh_key_for_remote_server:
 		@echo "Generating ssh key..."
 		@ssh-keygen -t rsa -b 4096 -C "wordpress-cluster" -f ~/.ssh/wordpress-cluster -q -N ""
 
-copy_ssh_key_to_clipboard:
-		@echo "Copying ssh key to clipboard..."
-		@cat ~/.ssh/wordpress-cluster.pub | pbcopy
-
 copy_ssh_key_to_remote_servers:
+		make generate_ssh_key_for_remote_server
 		@echo "Copiando clave SSH a los servidores remotos..."
 		@echo $(IP_ADDRESSES) | xargs -n 1 echo | xargs -I {} ssh-copy-id -i ~/.ssh/wordpress-cluster.pub root@{}

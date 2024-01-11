@@ -9,6 +9,14 @@ This is a high availability cluster build on top of [Ansible](https://www.ansibl
 
 ## Usage
 
+### Generate the SSH keys
+
+This command will create a SSH key pair in the `ssh_keys` directory and then will copy the public key to the remote servers.
+
+```bash
+make copy_ssh_key_to_remote_servers
+```
+
 ### Create the cluster
 
 - Update inventory.ini with the desired IP addresses
