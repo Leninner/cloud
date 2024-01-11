@@ -1,0 +1,15 @@
+---
+webserver_php_packages_var:
+  [
+    "php",
+    "php-mysqlnd",
+    "php-fpm",
+    "php-gd",
+    "php-xml",
+    "php-mbstring",
+    "php-json",
+    "php-opcache",
+    "php-zip",
+    "php-curl",
+  ]
+webserver_http_port: 80

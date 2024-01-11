@@ -1,0 +1,61 @@
+---
+- name: Install PyMySQL
+  ansible.builtin.package:
+    name: python3-PyMySQL
+    state: present
+
+- name: Install mysql
+  loop: "{{ database_sql_packages_var }}"
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+
+- name: Start mysql
+  ansible.builtin.service:
+    name: mysqld
+    state: started
+    enabled: true
+
+- name: Remove all anonymous user accounts
+  community.mysql.mysql_user:
+    name: ''
+    host_all: true
+    state: absent
+    login_user: root
+    login_password: "{{ database_root_password }}"
+  tags: [mysql]
+
+- name: Remove the MySQL test database
+  community.mysql.mysql_db:
+    name: test
+    state: absent
+    login_user: root
+    login_password: "{{ database_root_password }}"
+  tags: [mysql]
+
+- name: Creates database for WordPress
+  community.mysql.mysql_db:
+    name: "{{ database_name }}"
+    state: present
+    login_user: root
+    login_password: "{{ database_root_password }}"
+  tags: [mysql]
+
+- name: Create MySQL user for WordPress
+  community.mysql.mysql_user:
+    login_user: root
+    login_password: "{{ database_root_password }}"
+    name: "{{ database_wordpress_user }}"
+    password: "{{ database_wordpress_password }}"
+    priv: "{{ database_name }}.*:ALL"
+    state: present
+    host: "%"
+  tags: [mysql]
+
+- name: Open MySQL port 3306
+  ansible.posix.firewalld:
+    port: 3306/tcp
+    permanent: true
+    state: enabled
+    immediate: true
+  tags: [mysql]

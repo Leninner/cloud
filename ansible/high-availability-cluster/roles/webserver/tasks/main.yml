@@ -1,0 +1,60 @@
+---
+- name: Install nginx
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: Install php packages
+  loop: "{{ webserver_php_packages_var }}"
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+
+- name: Start nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: Start php-fpm
+  ansible.builtin.service:
+    name: php-fpm
+    state: started
+    enabled: true
+
+# - name: Directory for Wordpress
+#   file:
+#     path: "/usr/share/nginx/html/wordpress"
+#     state: absent
+#   tags: [ wordpress_cleanup ]
+
+- name: Download and unpack latest WordPress
+  ansible.builtin.unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: "/usr/share/nginx/html/"
+    remote_src: true
+    creates: "/usr/share/nginx/html/wordpress"
+    owner: root
+    group: root
+    mode: '0777'
+  tags: [wordpress]
+
+- name: Copy wp-config.php
+  ansible.builtin.copy:
+    src: ./config/webserver/wordpress/wp-config.php
+    dest: "/usr/share/nginx/html/wordpress/"
+    mode: '0644'
+    owner: root
+    group: root
+  tags:
+    - wordpress
+
+- name: "Firewalld - Allow HTTP on port {{ webserver_http_port }}"
+  ansible.posix.firewalld:
+    service: http
+    immediate: true
+    permanent: true
+    state: enabled
+    zone: public
+  tags:
+    - firewall
