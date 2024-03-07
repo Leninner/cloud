@@ -2,7 +2,6 @@
 2. Create a terraform cloud repository
    1. Get the organization name
    2. CLI login: terraform login and generate a token to login
-   rQLX8yo0fEOzDA.atlasv1.Avfhl72BBOzU8YjXiNNldgQK6UzONG0zouXCJC8yU6MMrEQXezZezIZddTLReoD2T28
    3. Set AWS credentials: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
    4. Set the terraform config
     ```hcl
