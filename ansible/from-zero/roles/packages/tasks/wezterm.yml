@@ -1,0 +1,8 @@
+- name: "Clone wezterm configuration"
+  ansible.builtin.git:
+    repo: "git@github.com:Leninner/wezterm-config.git"
+    dest: "/home/{{ user }}/.config/wezterm/"
+    force: yes
+    accept_hostkey: true
+    update: yes
+  tags: wezterm

@@ -1,9 +1,0 @@
-users_list:
-  - username: leninsin
-    state: absent
-
-  - username: stalin
-    state: absent
-
-  - username: pepe
-    state: absent

@@ -1,4 +1,0 @@
-- name: Configure the webserver
-  hosts: webserver
-  roles:
-    - users

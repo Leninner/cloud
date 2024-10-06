@@ -1,0 +1,33 @@
+---
+- name: "Add configuration files"
+  become: true
+  copy:
+    src: ../files/{{item}}
+    dest: "/home/{{ user }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0644
+  with_items: [".zshrc", ".vimrc", ".tmux.conf"]
+  tags: dotfiles
+
+# Neovim Config is manage on package part
+- name: "Init Neovim repo"
+  become: true
+  file:
+    path: "/home/{{ user }}/.config/nvim/"
+    state: directory
+    mode: "0755"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+  tags: dotfiles
+
+# Wezterm Config is manage on package part
+- name: "Init Wezterm repo"
+  become: true
+  file:
+    path: "/home/{{ user }}/.config/wezterm/"
+    state: directory
+    mode: "0755"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+  tags: dotfiles

@@ -1,7 +1,0 @@
----
-database_sql_packages_var: [mysql-server, mysql]
-database_wordpress_user: wordpressuser
-database_wordpress_password: wordpress
-database_wordpress_db: wordpress
-database_root_password: root
-database_name: wordpress

@@ -1,0 +1,11 @@
+- name: Create main directories
+  become: true
+  tags: directories
+  block:
+    - name: Dev
+      file:
+        path: "/home/{{ user }}/dev"
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: 0755
