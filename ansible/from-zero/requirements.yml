@@ -1,4 +1,3 @@
 ---
 collections:
   - ansible.posix
-  - darkwizard242.googlechrome
